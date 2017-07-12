@@ -39,6 +39,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /** \name Pre-defined video encodings */
 /* @{ */
 #define MMAL_ENCODING_H264             MMAL_FOURCC('H','2','6','4')
+#define MMAL_ENCODING_MVC              MMAL_FOURCC('M','V','C',' ')
 #define MMAL_ENCODING_H263             MMAL_FOURCC('H','2','6','3')
 #define MMAL_ENCODING_MP4V             MMAL_FOURCC('M','P','4','V')
 #define MMAL_ENCODING_MP2V             MMAL_FOURCC('M','P','2','V')
@@ -73,21 +74,73 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define MMAL_ENCODING_NV12             MMAL_FOURCC('N','V','1','2')
 #define MMAL_ENCODING_NV21             MMAL_FOURCC('N','V','2','1')
 #define MMAL_ENCODING_ARGB             MMAL_FOURCC('A','R','G','B')
+#define MMAL_ENCODING_ARGB_SLICE       MMAL_FOURCC('a','r','g','b')
 #define MMAL_ENCODING_RGBA             MMAL_FOURCC('R','G','B','A')
+#define MMAL_ENCODING_RGBA_SLICE       MMAL_FOURCC('r','g','b','a')
 #define MMAL_ENCODING_ABGR             MMAL_FOURCC('A','B','G','R')
+#define MMAL_ENCODING_ABGR_SLICE       MMAL_FOURCC('a','b','g','r')
 #define MMAL_ENCODING_BGRA             MMAL_FOURCC('B','G','R','A')
+#define MMAL_ENCODING_BGRA_SLICE       MMAL_FOURCC('b','g','r','a')
 #define MMAL_ENCODING_RGB16            MMAL_FOURCC('R','G','B','2')
+#define MMAL_ENCODING_RGB16_SLICE      MMAL_FOURCC('r','g','b','2')
 #define MMAL_ENCODING_RGB24            MMAL_FOURCC('R','G','B','3')
+#define MMAL_ENCODING_RGB24_SLICE      MMAL_FOURCC('r','g','b','3')
 #define MMAL_ENCODING_RGB32            MMAL_FOURCC('R','G','B','4')
+#define MMAL_ENCODING_RGB32_SLICE      MMAL_FOURCC('r','g','b','4')
 #define MMAL_ENCODING_BGR16            MMAL_FOURCC('B','G','R','2')
+#define MMAL_ENCODING_BGR16_SLICE      MMAL_FOURCC('b','g','r','2')
 #define MMAL_ENCODING_BGR24            MMAL_FOURCC('B','G','R','3')
+#define MMAL_ENCODING_BGR24_SLICE      MMAL_FOURCC('b','g','r','3')
 #define MMAL_ENCODING_BGR32            MMAL_FOURCC('B','G','R','4')
+#define MMAL_ENCODING_BGR32_SLICE      MMAL_FOURCC('b','g','r','4')
+
+/** YUV 4:2:0 planar, 16bit/component.
+*/
+#define MMAL_ENCODING_I420_16          MMAL_FOURCC('i','4','2','0')
+
+//Bayer formats
+//FourCC values copied from V4L2 where defined.
+//10 bit per pixel packed Bayer formats.
+#define MMAL_ENCODING_BAYER_SBGGR10P   MMAL_FOURCC('p','B','A','A')  //BGGR
+#define MMAL_ENCODING_BAYER_SGRBG10P   MMAL_FOURCC('p','g','A','A')  //GRBG
+#define MMAL_ENCODING_BAYER_SGBRG10P   MMAL_FOURCC('p','G','A','A')  //GBRG
+#define MMAL_ENCODING_BAYER_SRGGB10P   MMAL_FOURCC('p','R','A','A')  //RGGB
+
+//8 bit per pixel Bayer formats.
+#define MMAL_ENCODING_BAYER_SBGGR8     MMAL_FOURCC('B','A','8','1')  //BGGR
+#define MMAL_ENCODING_BAYER_SGBRG8     MMAL_FOURCC('G','B','R','G')  //GBRG
+#define MMAL_ENCODING_BAYER_SGRBG8     MMAL_FOURCC('G','R','B','G')  //GRBG
+#define MMAL_ENCODING_BAYER_SRGGB8     MMAL_FOURCC('R','G','G','B')  //RGGB
+
+//12 bit per pixel Bayer formats - not defined in V4L2, only 12bit expanded to 16.
+//Copy 10bpp packed 4CC pattern
+#define MMAL_ENCODING_BAYER_SBGGR12P   MMAL_FOURCC('p','B','1','2')  //BGGR
+#define MMAL_ENCODING_BAYER_SGRBG12P   MMAL_FOURCC('p','g','1','2')  //GRBG
+#define MMAL_ENCODING_BAYER_SGBRG12P   MMAL_FOURCC('p','G','1','2')  //GBRG
+#define MMAL_ENCODING_BAYER_SRGGB12P   MMAL_FOURCC('p','R','1','2')  //RGGB
+
+//16 bit per pixel Bayer formats.
+#define MMAL_ENCODING_BAYER_SBGGR16    MMAL_FOURCC('R','G','1','6')  //BGGR
+#define MMAL_ENCODING_BAYER_SGBRG16    MMAL_FOURCC('G','B','1','6')  //GBRG
+#define MMAL_ENCODING_BAYER_SGRBG16    MMAL_FOURCC('G','R','1','6')  //GRBG
+#define MMAL_ENCODING_BAYER_SRGGB16    MMAL_FOURCC('R','G','1','6')  //RGGB
+
+//10 bit per pixel DPCM compressed to 8bits Bayer formats.
+#define MMAL_ENCODING_BAYER_SBGGR10DPCM8 MMAL_FOURCC('b','B','A','8')  //BGGR
+#define MMAL_ENCODING_BAYER_SGBRG10DPCM8 MMAL_FOURCC('b','G','A','8')  //GBRG
+#define MMAL_ENCODING_BAYER_SGRBG10DPCM8 MMAL_FOURCC('B','D','1','0')  //GRBG
+#define MMAL_ENCODING_BAYER_SRGGB10DPCM8 MMAL_FOURCC('b','R','A','8')  //RGGB
 
 /** SAND Video (YUVUV128) format, native format understood by VideoCore.
  * This format is *not* opaque - if requested you will receive full frames
  * of YUV_UV video.
  */
 #define MMAL_ENCODING_YUVUV128         MMAL_FOURCC('S','A','N','D')
+/** 16 bit SAND Video (YUVUV64_16) format.
+ * This format is *not* opaque - if requested you will receive full frames
+ * of YUV_UV_16 video.
+ */
+#define MMAL_ENCODING_YUVUV64_16      MMAL_FOURCC('S','A','1','6')
 
 /** VideoCore opaque image format, image handles are returned to
  * the host but not the actual image data.
